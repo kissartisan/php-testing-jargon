@@ -4,7 +4,10 @@ namespace App;
 
 class Quiz
 {
-    protected array $questions = [];
+    protected array $questions;
+
+    protected $currentQuestion = 1;
+
     public function addQuestion(Question $question)
     {
         $this->questions[] = $question;
@@ -12,7 +15,15 @@ class Quiz
 
     public function nextQuestion()
     {
-        return $this->questions[0];
+        if(!isset($this->questions[$this->currentQuestion - 1])) {
+            return false;
+        }
+
+        $question = $this->questions[$this->currentQuestion - 1];
+
+        $this->currentQuestion++;
+
+        return $question;
     }
 
     public function questions()
@@ -20,8 +31,22 @@ class Quiz
         return $this->questions;
     }
 
+    public function isComplete()
+    {
+        $answeredQuestions = count(array_filter($this->questions, fn ($question) => $question->answered()));
+        $totalQuestions = count($this->questions);
+
+        return $answeredQuestions === $totalQuestions;
+    }
+
     public function grade()
     {
+        // If the quiz has not yet been completed
+        // Throw an exception
+        if (!$this->isComplete()) {
+            throw new \Exception("This quiz has not yet been completed.");
+        }
+
         $correct = count($this->correctlyAnsweredQuestions());
 
         return $correct / count($this->questions) * 100;

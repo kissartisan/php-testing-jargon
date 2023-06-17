@@ -7,7 +7,7 @@ class Question
     protected $body;
     protected $solution;
 
-    // protected $answer;
+    protected $answer;
 
     protected $correct;
 
@@ -18,9 +18,14 @@ class Question
 
     public function answer($answer)
     {
-        // $this->$answer = $answer;
+        $this->answer = $answer;
 
         return $this->correct = $answer === $this->solution;
+    }
+
+    public function answered()
+    {
+        return isset($this->answer);
     }
 
     public function solved()
