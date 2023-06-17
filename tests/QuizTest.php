@@ -48,4 +48,16 @@ class QuizTest extends TestCase
         // Grade the quiz
         $this->assertEquals(0, $quiz->grade());
     }
+
+    // /** @test */
+    // public function it_correctly_tracks_the_next_questions_in_the_queue()
+    // {
+
+    // }
+
+    // /** @test */
+    // public function it_cannot_be_graded_until_all_questions_have_been_answered()
+    // {
+
+    // }
 }

@@ -22,8 +22,13 @@ class Quiz
 
     public function grade()
     {
-        return array_filter($this->questions, function ($question) {
-            return $question->correct();
-        });
+        $correct = count($this->correctlyAnsweredQuestions());
+
+        return $correct / count($this->questions) * 100;
+    }
+
+    protected function correctlyAnsweredQuestions()
+    {
+        return array_filter($this->questions, fn ($question) => $question->solved());
     }
 }
