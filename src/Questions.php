@@ -7,8 +7,6 @@ class Questions implements Countable
 {
     protected array $questions;
 
-    protected $current = 0;
-
     public function __construct(array $questions = [])
     {
         $this->questions = $questions;

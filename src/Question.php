@@ -6,10 +6,7 @@ class Question
 {
     protected $body;
     protected $solution;
-
     protected $answer;
-
-    protected $correct;
 
     public function __construct($body, $solution) {
         $this->body = $body;
