@@ -21,13 +21,11 @@ class Questions implements Countable
 
     public function next()
     {
-        if (!isset($this->questions[$this->current])) {
-            return false;
-        }
+        $question = current($this->questions);
 
-        $this->current++;
+        next($this->questions);
 
-        return $this->questions[$this->current - 1];
+        return $question;
     }
 
     public function answered()
