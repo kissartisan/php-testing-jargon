@@ -2,9 +2,11 @@
 
 namespace Tests;
 
+use App\Gateway;
 use App\Subscription;
 use App\User;
 use PHPUnit\Framework\TestCase;
+use Tests\DummyGateway;
 
 class SubscriptionTest extends TestCase
 {
@@ -17,9 +19,9 @@ class SubscriptionTest extends TestCase
     /** @test */
     public function creating_a_subscription_marks_the_user_as_subscribed()
     {
-        $gateway = new FakeGateway(); // Don't use the actual Gateway. Use a dummy/fake version.
-        $subscription = new Subscription($gateway);
-        $user = new User('JohnDie');
+        // $gateway = new DummyGateway();
+        $subscription = new Subscription($this->createMock(Gateway::class));
+        $user = new User('JohnDoe');
 
         $this->assertFalse($user->isSubscribed());
 
