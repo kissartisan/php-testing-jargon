@@ -7,6 +7,7 @@ use App\Subscription;
 use App\User;
 use PHPUnit\Framework\TestCase;
 use Tests\DummyGateway;
+use Tests\GatewayStub;
 
 class SubscriptionTest extends TestCase
 {
@@ -19,8 +20,10 @@ class SubscriptionTest extends TestCase
     /** @test */
     public function creating_a_subscription_marks_the_user_as_subscribed()
     {
-        // $gateway = new DummyGateway();
         $subscription = new Subscription($this->createMock(Gateway::class));
+        // $subscription = new Subscription(new GatewayStub());
+
+
         $user = new User('JohnDoe');
 
         $this->assertFalse($user->isSubscribed());
